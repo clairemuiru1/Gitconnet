@@ -1,0 +1,89 @@
+.account-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background-color: purple; /* Update button color to purple */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #6a0080; /* Darker purple on hover */
+}
+
+.account-details {
+  text-align: center;
+}
+
+.account-details h2 {
+  margin-bottom: 20px;
+}
+
+.account-details p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  padding: 10px 20px;
+  background-color: purple;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #fb8c00;
+}
+
+@media (max-width: 600px) {
+  .account-container {
+      padding: 10px;
+  }
+}

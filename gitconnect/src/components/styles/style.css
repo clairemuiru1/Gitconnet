@@ -8,13 +8,13 @@
 }
 
 body {
+  background-color: #c9d6ff;
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  /* overflow: hidden; */
 }
 
 .container {
@@ -26,7 +26,6 @@ body {
   width: 768px;
   max-width: 100%;
   min-height: 480px;
-  margin: 20px;
 }
 
 .container p {

@@ -1,10 +1,12 @@
 'use client';
 
+import React from 'react'; 
+import Accounts from '@/components/Accounts';
+
 const Account: React.FC = () => {
   return (
-    <div>
-      <h1>Account</h1>
-      {/* Your account components go here */}
+    <div className="p-6">
+      <Accounts />
     </div>
   );
 };

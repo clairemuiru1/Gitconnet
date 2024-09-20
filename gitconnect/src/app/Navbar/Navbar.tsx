@@ -14,10 +14,10 @@ const Navbar: React.FC = () => {
           <Link href="/Profile" style={{ textDecoration: 'none', color: '#000' }}>
             <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', padding: '8px 16px', borderRadius: '4px' }}>Explore</button>
           </Link>
-          <Link href="/posts" style={{ textDecoration: 'none', color: '#000' }}>
+          <Link href="/Post" style={{ textDecoration: 'none', color: '#000' }}>
             <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', padding: '8px 16px', borderRadius: '4px' }}>Posts</button>
           </Link>
-          <Link href="/account" style={{ textDecoration: 'none', color: '#000' }}>
+          <Link href="/Account" style={{ textDecoration: 'none', color: '#000' }}>
             <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', padding: '8px 16px', borderRadius: '4px' }}>My Account</button>
           </Link>
         </div>

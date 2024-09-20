@@ -6,6 +6,10 @@
     flex-direction: column; 
 }
 
+.profile-container h2{
+    text-align: center;
+    font-size: 2rem;
+}
 .profile-cards {
     display: flex;
     flex-wrap: nowrap; 
