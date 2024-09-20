@@ -40,16 +40,17 @@ const Account: React.FC = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await databases.createDocument('66eac406003a5b6dad9f', '66ed2355002bcaa90c0b', 'unique()', formValues);
+    if (!accountCreated) {
       setAccount(formValues);
+      localStorage.setItem('account', JSON.stringify(formValues));
       setAccountCreated(true);
-    } catch (error) {
-      console.error('Error creating account:', error);
+    } else {
+      handleSave();
     }
   };
+
 
   const handleEdit = () => {
     setIsEditing(true);

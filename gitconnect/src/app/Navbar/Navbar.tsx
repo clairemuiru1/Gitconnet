@@ -20,6 +20,9 @@ const Navbar: React.FC = () => {
           <Link href="/Account" style={{ textDecoration: 'none', color: '#000' }}>
             <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', padding: '8px 16px', borderRadius: '4px' }}>My Account</button>
           </Link>
+          <Link href="/Signup" style={{ textDecoration: 'none', color: '#000' }}>
+            <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', padding: '8px 16px', borderRadius: '4px' }}>Sign Up</button>
+          </Link>
         </div>
       </div>
     </nav>
