@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Client, Databases, ID } from 'appwrite';
+import { Client, Databases, ID, Models } from 'appwrite';
 import { FaThumbsUp, FaThumbsDown, FaTrash, FaComment } from 'react-icons/fa'; 
 import './styles/post.css';
 
@@ -36,7 +36,15 @@ const Posts: React.FC = () => {
   const fetchPosts = async () => {
     try {
       const response = await databases.listDocuments('66eac406003a5b6dad9f', '66eb1c5f00114c64fb44');
-      setPosts(response.documents);
+      const mappedPosts: Post[] = response.documents.map((doc: Models.Document) => ({
+        $id: doc.$id,
+        title: doc.title,
+        content: doc.content,
+        likes: doc.likes || 0,
+        dislikes: doc.dislikes || 0,
+        comments: doc.comments || [],
+      }));
+      setPosts(mappedPosts);
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
@@ -69,7 +77,7 @@ const Posts: React.FC = () => {
       });
       fetchPosts();
       setFormValues({ title: '', content: '' });
-      setShowPostForm(false); // Hide form after submit
+      setShowPostForm(false);
     } catch (error) {
       console.error('Error creating post:', error);
     }
@@ -194,14 +202,14 @@ const Posts: React.FC = () => {
               </button>
             </div>
             {showCommentForm[post.$id] && (
-              <form className="comment-form">
+              <form className="comment-form" onSubmit={(e) => { e.preventDefault(); handleComment(post.$id); }}>
                 <input
                   type="text"
                   value={commentText[post.$id] || ''}
                   onChange={(e) => handleCommentChange(post.$id, e.target.value)}
                   placeholder="Add a comment"
                 />
-                <button onClick={() => handleComment(post.$id)}>Submit Comment</button>
+                <button type="submit">Submit Comment</button>
                 <input type="file" className="upload-btn" />
               </form>
             )}

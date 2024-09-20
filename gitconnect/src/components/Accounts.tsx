@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Databases } from 'appwrite';
 import { client } from './appwriteConfig';
-import './styles/account.css'; 
+import './styles/account.css';
 
 interface AccountDetails {
+  $id?: string; // Make $id optional for initial state
   name: string;
   email: string;
   education: string;
@@ -43,14 +44,14 @@ const Account: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!accountCreated) {
-      setAccount(formValues);
-      localStorage.setItem('account', JSON.stringify(formValues));
+      const newAccount = { ...formValues, $id: 'unique_account_id' }; // Assign a unique ID here
+      setAccount(newAccount);
+      localStorage.setItem('account', JSON.stringify(newAccount));
       setAccountCreated(true);
     } else {
       handleSave();
     }
   };
-
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -59,7 +60,7 @@ const Account: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      await databases.updateDocument('66eac406003a5b6dad9f', '66ed2355002bcaa90c0b', account.$id, formValues);
+      await databases.updateDocument('66eac406003a5b6dad9f', '66ed2355002bcaa90c0b', account.$id as string, formValues);
       setAccount(formValues);
       setIsEditing(false);
     } catch (error) {

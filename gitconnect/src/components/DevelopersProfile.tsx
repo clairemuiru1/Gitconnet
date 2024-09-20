@@ -5,19 +5,17 @@ import { Databases } from 'appwrite';
 import { client } from './appwriteConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import './styles/profile.css'
+import './styles/profile.css';
 
-// Initialize Appwrite Databases
 const databases = new Databases(client);
 
-// Define Profile interface
 interface Profile {
     $id: string;
     name: string;
     email: string;
     education: string;
     workExperience: string;
-    githubUsername: string; // GitHub username
+    githubUsername: string;
 }
 
 const DeveloperProfile: React.FC = () => {
@@ -27,11 +25,18 @@ const DeveloperProfile: React.FC = () => {
         fetchProfiles();
     }, []);
 
-    // Fetch profiles from Appwrite
     const fetchProfiles = async () => {
         try {
             const response = await databases.listDocuments('66eac406003a5b6dad9f', '66eaffe1003468499692');
-            setProfiles(response.documents);
+            const mappedProfiles: Profile[] = response.documents.map((doc: any) => ({
+                $id: doc.$id,
+                name: doc.name,
+                email: doc.email,
+                education: doc.education,
+                workExperience: doc.workExperience,
+                githubUsername: doc.githubUsername,
+            }));
+            setProfiles(mappedProfiles);
         } catch (error) {
             console.error('Error fetching profiles:', error);
         }

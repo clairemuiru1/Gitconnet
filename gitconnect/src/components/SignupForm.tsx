@@ -4,20 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { Account } from 'appwrite';
 import { client } from './appwriteConfig';
-// import { useRouter } from 'next/router';
 
 const account = new Account(client);
 
-const SignupForm: React.FC = () => {
+interface SignupFormProps {
+  toggleForm: () => void;
+}
+
+const SignupForm: React.FC<SignupFormProps> = ({ toggleForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [isSignUpActive, setIsSignUpActive] = useState(false); // Added state for form toggle
-
-  // const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +29,6 @@ const SignupForm: React.FC = () => {
       const response = await account.create('unique()', email, password);
       setSuccess('Account created successfully!');
       console.log('User signed up:', response);
-      // router.push('/my-account');
     } catch (err) {
       setError('Failed to sign up. Please try again.');
       console.error('Error signing up:', err);
@@ -48,7 +47,6 @@ const SignupForm: React.FC = () => {
       const response = await account.createSession(email, password);
       setSuccess('Logged in successfully!');
       console.log('User logged in:', response);
-      // router.push('/my-account');
     } catch (err) {
       setError('Failed to log in. Please try again.');
       console.error('Error logging in:', err);
@@ -57,12 +55,8 @@ const SignupForm: React.FC = () => {
     }
   };
 
-  const toggleSignUp = () => {
-    setIsSignUpActive(!isSignUpActive); // Toggle between sign-up and sign-in
-  };
-
   return (
-    <div className={`container ${isSignUpActive ? "active" : ""}`}>
+    <div className="container">
       <div className="form-container sign-in">
         <form onSubmit={handleLogin}>
           <h1>Sign In</h1>
@@ -88,7 +82,7 @@ const SignupForm: React.FC = () => {
           <button type="submit" disabled={loading}>
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
-          <p>Don't have an account? <a href="#" onClick={toggleSignUp}>Sign Up</a></p>
+          <p>Don't have an account? <a href="#" onClick={toggleForm}>Sign Up</a></p>
         </form>
       </div>
 
@@ -123,23 +117,8 @@ const SignupForm: React.FC = () => {
           <button type="submit" disabled={loading}>
             {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
-          <p>Already have an account? <a href="#" onClick={toggleSignUp}>Sign In</a></p>
+          <p>Already have an account? <a href="#" onClick={toggleForm}>Sign In</a></p>
         </form>
-      </div>
-
-      <div className="toggle-container">
-        <div className="toggle">
-          <div className="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
-            <p>To keep connected with us, please login with your personal info.</p>
-            <button onClick={toggleSignUp}>Sign In</button>
-          </div>
-          <div className="toggle-panel toggle-right">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start your journey with us.</p>
-            <button onClick={toggleSignUp}>Sign Up</button>
-          </div>
-        </div>
       </div>
     </div>
   );
