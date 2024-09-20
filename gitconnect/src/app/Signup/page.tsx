@@ -11,6 +11,7 @@ const SignupPage: React.FC = () => {
 
   return (
     <div className="page-container">
+      <h2>Signup Page</h2>
       {isSignup ? (
         <SignupForm toggleForm={toggleForm} />
       ) : (
