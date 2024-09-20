@@ -8,7 +8,11 @@ import { client } from './appwriteConfig';
 
 const account = new Account(client);
 
-const SignupForm: React.FC = () => {
+interface Props {
+  toggleForm: () => void;
+}
+
+const SignupForm: React.FC<Props>  = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
